@@ -1,5 +1,6 @@
 package chess;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class ChessPiece {
     private final ChessGame.TeamColor color;
     private final PieceType type;
 
-    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
+    public ChessPiece(ChessGame.TeamColor pieceColor, PieceType type) {
         this.color = pieceColor;
         this.type = type;
     }
@@ -45,15 +46,17 @@ public class ChessPiece {
         return type;
     }
 
-    /**
-     * Calculates all the positions a chess piece can move to
-     * Does not take into account moves that are illegal due to leaving the king in
-     * danger
-     *
-     * @return Collection of valid moves
-     */
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+
+    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position) {
+        PieceMovesCalculator moves = switch(getPieceType()) {
+            case KING -> null;
+            case QUEEN -> null;
+            case BISHOP -> null;
+            case KNIGHT -> null;
+            case ROOK -> new RookCalculator();
+            case PAWN -> null;
+        };
+        return moves.pieceMoves(board, position);
     }
 
     @Override
@@ -68,7 +71,6 @@ public class ChessPiece {
     public int hashCode() {
         return Objects.hash(color, type);
     }
-
     @Override
     public String toString() {
         return "ChessPiece{" +

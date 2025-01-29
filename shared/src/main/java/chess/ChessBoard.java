@@ -41,7 +41,12 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
-        new ChessBoard();
+        for (int i = 0; i < squares.length; i++) {
+            for (int j = 0; j < squares[i].length; j++) {
+                squares[i][j] = null;
+            }
+        }
+
         ChessPiece.PieceType[] pieces = {
                 ChessPiece.PieceType.ROOK,
                 ChessPiece.PieceType.KNIGHT,
