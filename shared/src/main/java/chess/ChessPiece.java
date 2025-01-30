@@ -49,12 +49,12 @@ public class ChessPiece {
 
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position) {
         PieceMovesCalculator moves = switch(getPieceType()) {
-            case KING -> null;
-            case QUEEN -> null;
-            case BISHOP -> null;
-            case KNIGHT -> null;
+            case KING -> new KingCalculator();
+            case QUEEN -> new QueenCalculator();
+            case BISHOP -> new BishopCalculator();
+            case KNIGHT -> new KnightCalculator();
             case ROOK -> new RookCalculator();
-            case PAWN -> null;
+            case PAWN -> new PawnCalculator();
         };
         return moves.pieceMoves(board, position);
     }
