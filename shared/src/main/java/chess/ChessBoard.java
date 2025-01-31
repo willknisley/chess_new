@@ -33,6 +33,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
+        //return isInBounds(position.getRow(), position.getColumn()) ? squares[position.getRow()][position.getColumn()] : null;
         return squares[position.getRow()][position.getColumn()];
     }
 
@@ -40,6 +41,11 @@ public class ChessBoard {
      * Sets the board to the default starting board
      * (How the game of chess normally starts)
      */
+
+    public boolean isInBounds(int row, int col) {
+        return row >= 1 && row <= 8 && col >= 1 && col <= 8;
+    }
+
     public void resetBoard() {
         for (int i = 0; i < squares.length; i++) {
             for (int j = 0; j < squares[i].length; j++) {
