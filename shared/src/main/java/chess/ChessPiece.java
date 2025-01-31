@@ -49,15 +49,17 @@ public class ChessPiece {
 
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position) {
         PieceMovesCalculator moves = switch(getPieceType()) {
-            case KING -> new KingCalculator(color);
-            case QUEEN -> new QueenCalculator(color);
+            case KING -> new KingCalculator();
+            case QUEEN -> new QueenCalculator();
             case BISHOP -> new BishopCalculator(color);
-            case KNIGHT -> new KnightCalculator(color);
+            case KNIGHT -> new KnightCalculator();
             case ROOK -> new RookCalculator(color);
-            case PAWN -> new PawnCalculator(color);
+            case PAWN -> new PawnCalculator();
         };
         return moves.pieceMoves(board, position);
     }
+
+
 
     @Override
     public boolean equals(Object o) {
