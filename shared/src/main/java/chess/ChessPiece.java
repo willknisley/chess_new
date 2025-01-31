@@ -52,7 +52,7 @@ public class ChessPiece {
             case KING -> new KingCalculator(color);
             case QUEEN -> new QueenCalculator(color);
             case BISHOP -> new BishopCalculator(color);
-            case KNIGHT -> new KnightCalculator();
+            case KNIGHT -> new KnightCalculator(color);
             case ROOK -> new RookCalculator(color);
             case PAWN -> new PawnCalculator();
         };
