@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BishopCalculator implements PieceMovesCalculator {
 
-    private static final int[][] directions = {{1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
+    public static final int[][] directions = {{1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
     private final ChessGame.TeamColor color;
 
     public BishopCalculator(ChessGame.TeamColor color) {
