@@ -2,7 +2,6 @@ package chess;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class PawnCalculator implements PieceMovesCalculator {
     private final ChessGame.TeamColor color;
@@ -26,7 +25,15 @@ public class PawnCalculator implements PieceMovesCalculator {
         if (board.isInBounds(row, col)) {
             ChessPosition newPosition = new ChessPosition(row, col);
             if (board.getPiece(newPosition) == null) {
-                if (position.getRow() == 8 || position.getRow() == 1) {
+                if (row == 7 || row == 2) {
+                    row = position.getRow() + 2 * row;
+                    if (board.isInBounds(row, col)) {
+                        ChessPosition secondPosition = new ChessPosition(row, col);
+                        if (board.getPiece(secondPosition) == null) {
+                            newMoves.add(new ChessMove(position, secondPosition, null));
+                        }
+                    }
+                } else if (row == 8 || row == 1) {
                     newMoves.add(new ChessMove(position, newPosition, ChessPiece.PieceType.QUEEN));
                     newMoves.add(new ChessMove(position, newPosition, ChessPiece.PieceType.ROOK));
                     newMoves.add(new ChessMove(position, newPosition, ChessPiece.PieceType.BISHOP));
@@ -35,9 +42,31 @@ public class PawnCalculator implements PieceMovesCalculator {
                     newMoves.add(new ChessMove(position, newPosition, null));
                 }
 
+
+                int newRow, newCol;
+                if (board.getPiece(newPosition) != null && board.getPiece(newPosition).getTeamColor() != color) {
+                    if (color == ChessGame.TeamColor.WHITE) {
+                        newRow = row + 1;
+                        newCol = col + 1;
+                    } else {
+                        newRow = row - 1;
+                        newCol = row - 1;
+                    }
+                    if (board.isInBounds(newRow, newCol)) {
+                        if (newRow == 8 || newRow == 1) {
+                            newMoves.add(new ChessMove(position, newPosition, ChessPiece.PieceType.QUEEN));
+                            newMoves.add(new ChessMove(position, newPosition, ChessPiece.PieceType.ROOK));
+                            newMoves.add(new ChessMove(position, newPosition, ChessPiece.PieceType.BISHOP));
+                            newMoves.add(new ChessMove(position, newPosition, ChessPiece.PieceType.KNIGHT));
+                        } else {
+                            newMoves.add(new ChessMove(position, newPosition, null));
+                        }
+                    }
+                }
             }
 
         }
         return newMoves;
     }
 }
+
