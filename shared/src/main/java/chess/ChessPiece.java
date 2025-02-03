@@ -54,7 +54,7 @@ public class ChessPiece {
             case BISHOP -> new BishopCalculator(color);
             case KNIGHT -> new KnightCalculator(color);
             case ROOK -> new RookCalculator(color);
-            case PAWN -> new PawnCalculator();
+            case PAWN -> new PawnCalculator(color);
         };
         return moves.pieceMoves(board, position);
     }
